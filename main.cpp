@@ -15,6 +15,8 @@ using namespace std;
 
 int main() {
   Vector v1;
-
+  cout << "Size(): " << v1.size() <<"\tcapacity(): " << v1.size() << endl;
+  v1.print();
+  
   return 0;
 }

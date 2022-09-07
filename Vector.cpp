@@ -47,6 +47,14 @@ Vector::~Vector() {
   vec_size = 0;
 }
 
+int Vector::size() {
+  return vec_size;
+}
+
+int Vector::capacity() {
+  return vec_capacity;
+}
+
 void Vector::reserve(int n) {
   if (n <= vec_capacity)
     return;
@@ -66,8 +74,10 @@ void Vector::reserve(int n) {
 }
 
 void Vector::print() {
-  if (vec_ptr == nullptr or vec_size == 0)
+  if (vec_ptr == nullptr or vec_size == 0) {
+    cout << "Empty Vector..." << endl;
     return;
+  }
   
   cout << "Contents of vector with size " << vec_size << " and capacity " << vec_capacity << " is: ";
   for (int i = 0; i < vec_size; i++) {
