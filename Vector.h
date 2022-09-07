@@ -20,7 +20,8 @@
 class Vector {
  private:
   int *vec_ptr;
-  int vec_size, vec_capacity;
+  int vec_size;
+  int vec_capacity;
 
  public:
 
