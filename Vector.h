@@ -10,7 +10,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-
 /**
  * A basic remake of the std::vector class from the C++ stl.
  *
@@ -109,6 +108,14 @@ class Vector {
  * 
  */
   int& operator[](unsigned int index);
+
+/**
+ * Prints contents of vector
+ *
+ * @pre vector must have elements to print
+ * 
+ */
+  void print();
 };
 
 #endif //VECTOR_H
