@@ -108,7 +108,7 @@ class Vector {
  * @return int& returns a reference to the int at the index given
  * 
  */
-  int& operatror[](unsigned int index);
+  int& operator[](unsigned int index);
 };
 
-#endif VECTOR_H
+#endif //VECTOR_H
