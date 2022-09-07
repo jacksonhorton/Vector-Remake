@@ -46,6 +46,22 @@ Vector::~Vector() {
   vec_size = 0;
 }
 
+Vector& Vector::operator=(const Vector &other) {
+  // checks that this Vector isn't the same vector as the passed Vector
+  if (this == &other)
+    return *this;
+
+  // reserves the capacity of this array to the size of the source array
+  reserve(other.vec_size);
+  // transfers contents
+  for (int i = 0; i < other.vec_size; i++) {
+    vec_ptr[i] = other.vec_ptr[i];
+  }
+
+  // sets size and returns this Vector
+  vec_size = other.vec_size;
+  return *this;
+}
 int Vector::size() {
   return vec_size;
 }
