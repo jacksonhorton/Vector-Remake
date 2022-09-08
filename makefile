@@ -1,7 +1,8 @@
 TARGET=main
 CC=g++
 CFLAGS=-g -Wall -Wextra
-TEST=valgrind --leak-check=yes --track-origins=yes -v
+TEST=valgrind
+TESTFLAGS=--leak-check=yes --track-origins=yes -v
 
 main: Vector.o main.o
 	$(CC) $(CFLAGS) -o $(TARGET) main.o
@@ -18,8 +19,8 @@ rebuild:
 	$(MAKE) clean
 	$(MAKE) $(TARGET)
 
-test:
-	$(TEST) ./$(TARGET)
+memtest:
+	$(TEST) $(TESTFLAGS) ./$(TARGET)
 
 clean:
 	$(RM) dyn *.o *~ *# $(TARGET)
