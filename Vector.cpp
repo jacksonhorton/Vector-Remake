@@ -21,17 +21,18 @@ Vector::Vector() {
 
 Vector::Vector(const Vector &other) {
   // initializes 
+  vec_ptr = nullptr;
   vec_capacity = 0;
   vec_size = 0;
 
-  // initialized Vector's dynamic array to size of the passed Vector
+  // reserves the same capacity as the other Vector
   reserve(other.vec_capacity);
 
   // deep copy and sets size to equal other's size
   for (int i = 0; i < other.vec_size; i++) {
     vec_ptr[i] = other.vec_ptr[i];
-    vec_size++;
   }
+  vec_size = other.vec_size;
 }
 
 Vector::~Vector() {
@@ -47,12 +48,12 @@ Vector::~Vector() {
 }
 
 Vector& Vector::operator=(const Vector &other) {
-  // checks that this Vector isn't the same vector as the passed Vector
+  // if the other, passed Vector is this Vector, do nothing.
   if (this == &other)
     return *this;
-
-  // reserves the capacity of this array to the size of the source array
-  reserve(other.vec_size);
+    
+  // reserves the capacity of this array to the capacity of the other array
+  reserve(other.vec_capacity);
   // transfers contents
   for (int i = 0; i < other.vec_size; i++) {
     vec_ptr[i] = other.vec_ptr[i];
@@ -62,6 +63,7 @@ Vector& Vector::operator=(const Vector &other) {
   vec_size = other.vec_size;
   return *this;
 }
+
 int Vector::size() {
   return vec_size;
 }
@@ -71,6 +73,7 @@ int Vector::capacity() {
 }
 
 void Vector::push_back(int element) {
+  // if the Vector's array is full, reserve more memory first
   if (vec_size == vec_capacity) {
     if (vec_size == 0)
       reserve(1);
@@ -78,12 +81,13 @@ void Vector::push_back(int element) {
       reserve(2*vec_capacity);
   }
 
+  // then adds element to end and increments size
   vec_ptr[vec_size] = element;
   vec_size++;
 }
 
 void Vector::reserve(int n) {
-  // the Vector doesn't have to reserve anything if n < capacity
+  // this function doesn't have to do anything if n < capacity
   if (n <= vec_capacity)
     return;
   
@@ -103,21 +107,24 @@ void Vector::reserve(int n) {
   vec_capacity = n;
 }
 
+int& Vector::operator[](unsigned int index) {
+  // returns the reference to the elemnt of index "index" so it can be read or modified
+  int& element_ref = vec_ptr[index];
+  
+  return element_ref;
+}
+
 void Vector::print() {
+  // checks if Vector's array is empty or a nullptr to avoid errors
   if (vec_ptr == nullptr or vec_size == 0) {
     cout << "Empty Vector..." << endl;
     return;
   }
-  
+
+  // prints out all the elements in this Vector
   cout << "Contents of vector with size " << vec_size << " and capacity " << vec_capacity << " is: ";
   for (int i = 0; i < vec_size; i++) {
     cout << vec_ptr[i] << " ";
   }
   cout << endl;
-}
-
-int& Vector::operator[](unsigned int index) {
-  int& element_ref = vec_ptr[index];
-  
-  return element_ref;
 }
